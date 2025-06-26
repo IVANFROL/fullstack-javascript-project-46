@@ -8,7 +8,11 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,11 @@
   },
   "homepage": "https://github.com/IVANFROL/fullstack-javascript-project-46#readme",
   "dependencies": {
-    "commander": "^14.0.0"
+    "commander": "^14.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "jest": "^30.0.3"
   }
 }
