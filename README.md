@@ -5,3 +5,11 @@
 ### Пример работы пакета (asciinema):
 
 [![asciinema](https://asciinema.org/a/g6ZBhsDPEv3joVWOxi60pHmel.svg)](https://asciinema.org/a/g6ZBhsDPEv3joVWOxi60pHmel)
+
+### Code Quality:
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/quality_gate?project=IVANFROL_fullstack-javascript-project-46)](https://sonarcloud.io/summary/new_code?id=IVANFROL_fullstack-javascript-project-46)
+
+### Test Coverage:
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=IVANFROL_fullstack-javascript-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=IVANFROL_fullstack-javascript-project-46)
