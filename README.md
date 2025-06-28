@@ -17,3 +17,7 @@
 ### Пример работы с вложенными структурами (asciinema):
 
 [![asciinema](https://asciinema.org/a/7aexEzPsDnWOV0SiW8eg2KFqt.svg)](https://asciinema.org/a/7aexEzPsDnWOV0SiW8eg2KFqt)
+
+### Пример работы plain-формата (asciinema):
+
+[![asciinema](https://asciinema.org/a/LdYGNDkbdkn8MjKi0KjSi5gpS.svg)](https://asciinema.org/a/LdYGNDkbdkn8MjKi0KjSi5gpS)

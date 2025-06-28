@@ -26,4 +26,12 @@ describe("genDiff nested", () => {
     const result = genDiff(filepath1, filepath2);
     expect(result).toBe(expected);
   });
+
+  test("should compare nested JSON files correctly (plain)", () => {
+    const filepath1 = getFixturePath("file1.json");
+    const filepath2 = getFixturePath("file2.json");
+    const expected = readFile(getFixturePath("expected_plain.txt")).trim();
+    const result = genDiff(filepath1, filepath2, "plain");
+    expect(result).toBe(expected);
+  });
 });
