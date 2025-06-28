@@ -21,3 +21,7 @@
 ### Пример работы plain-формата (asciinema):
 
 [![asciinema](https://asciinema.org/a/LdYGNDkbdkn8MjKi0KjSi5gpS.svg)](https://asciinema.org/a/LdYGNDkbdkn8MjKi0KjSi5gpS)
+
+### Пример работы json-формата (asciinema):
+
+[![asciinema](https://asciinema.org/a/PVFNbFznZEUJUm8uCxjlIpTWi.svg)](https://asciinema.org/a/PVFNbFznZEUJUm8uCxjlIpTWi)
