@@ -13,3 +13,7 @@
 ### Test Coverage:
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=IVANFROL_fullstack-javascript-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=IVANFROL_fullstack-javascript-project-46)
+
+### Пример работы с вложенными структурами (asciinema):
+
+[![asciinema](https://asciinema.org/a/7aexEzPsDnWOV0SiW8eg2KFqt.svg)](https://asciinema.org/a/7aexEzPsDnWOV0SiW8eg2KFqt)

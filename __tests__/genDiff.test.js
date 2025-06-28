@@ -49,4 +49,31 @@ describe("genDiff", () => {
     fs.unlinkSync(emptyFile1);
     fs.unlinkSync(emptyFile2);
   });
+
+  test("should compare flat YAML files correctly", () => {
+    const filepath1 = getFixturePath("file1.yml");
+    const filepath2 = getFixturePath("file2.yml");
+    const expected = readFile(getFixturePath("expected.txt")).trim();
+
+    const result = genDiff(filepath1, filepath2);
+    expect(result).toBe(expected);
+  });
+});
+
+describe("genDiff nested", () => {
+  test("should compare nested JSON files correctly (stylish)", () => {
+    const filepath1 = getFixturePath("file1.json");
+    const filepath2 = getFixturePath("file2.json");
+    const expected = readFile(getFixturePath("expected_nested.txt")).trim();
+    const result = genDiff(filepath1, filepath2);
+    expect(result).toBe(expected);
+  });
+
+  test("should compare nested YAML files correctly (stylish)", () => {
+    const filepath1 = getFixturePath("file1.yml");
+    const filepath2 = getFixturePath("file2.yml");
+    const expected = readFile(getFixturePath("expected_nested.txt")).trim();
+    const result = genDiff(filepath1, filepath2);
+    expect(result).toBe(expected);
+  });
 });
