@@ -25,10 +25,10 @@ export default [
     rules: {
       'no-unused-vars': 'error',
       'no-undef': 'error',
-      'semi': ['error', 'never'],
-      'quotes': ['error', 'single'],
+      semi: ['error', 'never'],
+      quotes: ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
-      'arrow-parens': ['error', 'as-needed'],
+      'arrow-parens': ['error', 'always'],
       'no-extra-parens': 'error',
       'no-constant-binary-expression': 'error',
     },
