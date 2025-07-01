@@ -6,18 +6,18 @@ import genDiff from '../src/index.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
-const readFile = filename => fs.readFileSync(getFixturePath(filename), 'utf-8')
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename)
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8')
 
 const extensions = ['json', 'yml']
 const correct = {
   stylish: readFile('correct-stylish.txt'),
   plain: readFile('correct-plain.txt'),
-  json: readFile('correct-json.txt')
+  json: readFile('correct-json.txt'),
 }
 
 describe('Positives cases', () => {
-  extensions.forEach(ext => {
+  extensions.forEach((ext) => {
     test(`Format ${ext.toUpperCase()}`, () => {
       const file1 = getFixturePath(`file1.${ext}`)
       const file2 = getFixturePath(`file2.${ext}`)

@@ -9,7 +9,7 @@ export default (fileData, extension) => {
       return YAML.parse(fileData)
     default:
       throw new Error(
-        `Invalid file extension: '${extension}'! Try supported formats.`
+        `Invalid file extension: '${extension}'! Try supported formats.`,
       )
   }
 }

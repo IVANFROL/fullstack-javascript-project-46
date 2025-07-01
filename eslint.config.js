@@ -19,18 +19,18 @@ export default [
         afterAll: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
-        process: 'readonly'
-      }
+        process: 'readonly',
+      },
     },
     rules: {
       'no-unused-vars': 'error',
       'no-undef': 'error',
       'semi': ['error', 'never'],
       'quotes': ['error', 'single'],
-      'comma-dangle': ['error', 'never'],
-      'arrow-parens': ['error', 'as-needed'],
+      'comma-dangle': ['error', 'always-multiline'],
+      'arrow-parens': ['error', 'always'],
       'no-extra-parens': 'error',
-      'no-constant-binary-expression': 'error'
-    }
-  }
+      'no-constant-binary-expression': 'error',
+    },
+  },
 ]

@@ -16,11 +16,11 @@ const stringify = (data, depth, replacer) => {
 const sign = {
   added: '+',
   deleted: '-',
-  unchanged: ' '
+  unchanged: ' ',
 }
 
 const makeStylish = (diff, replacer = '    ') => {
-  const iter = (tree, depth) => tree.map(node => {
+  const iter = (tree, depth) => tree.map((node) => {
     const indent = replacer.repeat(depth)
     const indentForSign = indent.slice(2)
 

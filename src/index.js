@@ -4,8 +4,8 @@ import parse from './parsers.js'
 import buildTree from './buildTree.js'
 import getFormattedTree from './formatters/index.js'
 
-const getAbsolutePath = file => path.resolve(process.cwd(), file)
-const getExtension = file => path.extname(file).slice(1)
+const getAbsolutePath = (file) => path.resolve(process.cwd(), file)
+const getExtension = (file) => path.extname(file).slice(1)
 
 function getDataFromFile(filepath) {
   const absolutePath = getAbsolutePath(filepath)
