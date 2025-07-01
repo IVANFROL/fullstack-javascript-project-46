@@ -1,45 +1,39 @@
-import { readFileSync } from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import genDiff from "../src/index.js";
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
-const getFixturePath = (filename) =>
-  path.join(__dirname, "..", "__fixtures__", filename);
-const readFile = (filename) => readFileSync(getFixturePath(filename), "utf-8");
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-describe("genDiff", () => {
-  test("should compare nested JSON files", () => {
-    const file1 = getFixturePath("file1.json");
-    const file2 = getFixturePath("file2.json");
-    const expected = readFile("expected.txt").trim();
-    const result = genDiff(file1, file2);
-    expect(result).toEqual(expected);
+const extensions = ['json', 'yml'];
+const correct = {
+  stylish: readFile('correct-stylish.txt'),
+  plain: readFile('correct-plain.txt'),
+  json: readFile('correct-json.txt'),
+};
+
+describe('Positives cases', () => {
+  extensions.forEach((ext) => {
+    test(`Format ${ext.toUpperCase()}`, () => {
+      const file1 = getFixturePath(`file1.${ext}`);
+      const file2 = getFixturePath(`file2.${ext}`);
+      expect(genDiff(file1, file2)).toEqual(correct.stylish);
+      expect(genDiff(file1, file2, 'plain')).toEqual(correct.plain);
+      expect(genDiff(file1, file2, 'json')).toEqual(correct.json);
+    });
   });
+});
 
-  test("should compare nested YAML files", () => {
-    const file1 = getFixturePath("file1.yml");
-    const file2 = getFixturePath("file2.yml");
-    const expected = readFile("expected-yaml.txt").trim();
-    const result = genDiff(file1, file2);
-    expect(result).toEqual(expected);
-  });
+describe('Negative cases', () => {
+  test('Check wrong file extension', () => {
+    const error = new Error("Invalid file extension: 'txt'! Try supported formats.");
 
-  test("should format diff in plain style", () => {
-    const file1 = getFixturePath("file1.json");
-    const file2 = getFixturePath("file2.json");
-    const expected = readFile("expected-plain.txt").trim();
-    const result = genDiff(file1, file2, "plain");
-    expect(result).toEqual(expected);
-  });
-
-  test("should format diff in json style", () => {
-    const file1 = getFixturePath("file1.json");
-    const file2 = getFixturePath("file2.json");
-    const result = genDiff(file1, file2, "json");
-    expect(() => JSON.parse(result)).not.toThrow();
-    expect(result).toMatchSnapshot();
+    expect(() => {
+      genDiff(getFixturePath('file1-wrong.txt'), getFixturePath('file2-wrong.txt'));
+    }).toThrow(error);
   });
 });

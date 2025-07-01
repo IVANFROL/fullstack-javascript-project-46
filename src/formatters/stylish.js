@@ -1,47 +1,50 @@
-const stringify = (value, depth) => {
-  if (typeof value !== 'object' || value === null) {
-    return value === null ? 'null' : String(value)
+import _ from 'lodash';
+
+const stringify = (data, depth, replacer) => {
+  if (!_.isObject(data)) {
+    return `${data}`;
   }
 
-  const indent = ' '.repeat(depth * 4 + 4)
-  const lines = Object.entries(value)
-    .map(([key, val]) => `${indent}${key}: ${stringify(val, depth + 1)}`)
+  const indentForKey = replacer.repeat(depth + 1);
+  const indentForBracket = replacer.repeat(depth);
+  const lines = Object.entries(data)
+    .map(([key, value]) => `${indentForKey}${key}: ${stringify(value, depth + 1, replacer)}`);
 
-  return `{\n${lines.join('\n')}\n${' '.repeat(depth * 4)}}`
-}
+  return ['{', ...lines, `${indentForBracket}}`].join('\n');
+};
 
-const formatters = {
-  added: (node, depth, indent) =>
-    `${indent}+ ${node.key}: ${stringify(node.value, depth + 1)}`,
+const sign = {
+  added: '+',
+  deleted: '-',
+  unchanged: ' ',
+};
 
-  removed: (node, depth, indent) =>
-    `${indent}- ${node.key}: ${stringify(node.value, depth + 1)}`,
+const makeStylish = (diff, replacer = '    ') => {
+  const iter = (tree, depth) => tree.map((node) => {
+    const indent = replacer.repeat(depth);
+    const indentForSign = indent.slice(2);
 
-  unchanged: (node, depth, indent) =>
-    `${indent}  ${node.key}: ${stringify(node.value, depth + 1)}`,
+    const makeLine = (value, mark) => `${indentForSign}${mark} ${node.key}: ${stringify(value, depth, replacer)}`;
 
-  changed: (node, depth, indent) => [
-    `${indent}- ${node.key}: ${stringify(node.oldValue, depth + 1)}`,
-    `${indent}+ ${node.key}: ${stringify(node.newValue, depth + 1)}`,
-  ].join('\n'),
-
-  nested: (node, depth, indent) =>
-    `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`,
-}
-
-const formatStylish = (diff, depth = 0) => {
-  const indent = ' '.repeat(depth * 4 + 2)
-  const bracketIndent = ' '.repeat(depth * 4)
-
-  const lines = diff.map((node) => {
-    const formatter = formatters[node.type]
-    if (!formatter) {
-      throw new Error(`Unknown node type: ${node.type}`)
+    switch (node.state) {
+      case 'added':
+        return makeLine(node.value, sign.added);
+      case 'deleted':
+        return makeLine(node.value, sign.deleted);
+      case 'unchanged':
+        return makeLine(node.value, sign.unchanged);
+      case 'changed':
+        return [`${makeLine(node.value1, sign.deleted)}`,
+          `${makeLine(node.value2, sign.added)}`].join('\n');
+      case 'nested':
+        return `${indent}${node.key}: ${['{', ...iter(node.value, depth + 1), `${indent}}`].join('\n')}`;
+      default:
+        throw new Error(`Type: ${node.state} is undefined`);
     }
-    return formatter(node, depth, indent)
-  })
+  });
 
-  return `{\n${lines.join('\n')}\n${bracketIndent}}`
-}
+  const stylishDiff = iter(diff, 1);
+  return ['{', ...stylishDiff, '}'].join('\n');
+};
 
-export default formatStylish
+export default makeStylish;

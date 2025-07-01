@@ -1,21 +1,18 @@
-import formatStylish from './stylish.js'
-import formatPlain from './plain.js'
-import formatJson from './json.js'
+import makeStylish from './stylish.js';
+import makePlain from './plain.js';
+import makeJSON from './json.js';
 
-const formatters = {
-  stylish: formatStylish,
-  plain: formatPlain,
-  json: formatJson,
+function formattedTree(data, format, replacer) {
+  switch (format) {
+    case 'stylish':
+      return makeStylish(data, replacer);
+    case 'plain':
+      return makePlain(data);
+    case 'json':
+      return makeJSON(data);
+    default:
+      throw new Error(`Invalid file format type: '.${format}'! Try supported file formats.`);
+  }
 }
 
-const getFormatter = (formatName) => {
-  if (typeof formatName !== 'string') {
-    throw new Error(`Format name must be a string, received: ${typeof formatName}`)
-  }
-  const formatter = formatters[formatName]
-  if (!formatter) {
-    throw new Error(`Unknown format: ${formatName}`)
-  }
-  return formatter
-}
-export default getFormatter
+export default formattedTree;

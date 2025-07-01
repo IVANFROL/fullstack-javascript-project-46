@@ -1,19 +1,27 @@
-import parse from './parsers.js'
-import buildDiff from './diffBuilder.js'
-import getFormatter from './formatters/index.js'
-import { readFile, getFileFormat } from './fileReader.js'
+import fs from 'fs';
+import path from 'path';
+import parse from './parsers.js';
+import buildTree from './buildTree.js';
+import getFormattedTree from './formatters/index.js';
 
-export default (filepath1, filepath2, formatName = 'stylish') => {
-  if (typeof formatName !== 'string') {
-    throw new Error(`Format name must be a string, received: ${typeof formatName}`)
-  }
-  const formatter = getFormatter(formatName)
-  const content1 = readFile(filepath1)
-  const format1 = getFileFormat(filepath1)
-  const data1 = parse(content1, format1)
-  const content2 = readFile(filepath2)
-  const format2 = getFileFormat(filepath2)
-  const data2 = parse(content2, format2)
-  const diff = buildDiff(data1, data2)
-  return formatter(diff)
+const getAbsolutePath = (file) => path.resolve(process.cwd(), file);
+const getExtension = ((file) => path.extname(file).slice(1));
+
+function getDataFromFile(filepath) {
+  const absolutePath = getAbsolutePath(filepath);
+  const data = fs.readFileSync(absolutePath, 'utf8');
+  const extension = getExtension(filepath);
+
+  return parse(data, extension);
 }
+
+function genDiff(filepath1, filepath2, format = 'stylish') {
+  const data1 = getDataFromFile(filepath1);
+  const data2 = getDataFromFile(filepath2);
+  const tree = buildTree(data1, data2);
+  const formattedTree = getFormattedTree(tree, format);
+
+  return formattedTree;
+}
+
+export default genDiff;

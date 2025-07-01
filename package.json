@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Compares two configuration files and shows a difference",
   "main": "src/index.js",
-  "type": "module",
-  "engines": {
-    "node": ">=18.14.0"
-  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
@@ -16,6 +12,29 @@
     "lint": "eslint .",
     "coverage": "npm test -- --coverage"
   },
+  "author": "Ivan Korenets",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@eslint/create-config": "^1.0.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "globals": "^15.14.0"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "fs": "^0.0.1-security",
+    "jest": "^29.7.0",
+    "lodash": "^4.17.21",
+    "path": "^0.12.7",
+    "yaml": "^2.7.0"
+  },
   "jest": {
     "testEnvironment": "node",
     "collectCoverageFrom": [
@@ -24,32 +43,5 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IVANFROL/fullstack-javascript-project-46.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/IVANFROL/fullstack-javascript-project-46/issues"
-  },
-  "homepage": "https://github.com/IVANFROL/fullstack-javascript-project-46#readme",
-  "keywords": [],
-  "dependencies": {
-    "commander": "^13.1.0",
-    "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.26.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^9.26.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.4.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.1.0",
-    "jest": "^30.0.3",
-    "prettier": "3.5.3"
   }
 }

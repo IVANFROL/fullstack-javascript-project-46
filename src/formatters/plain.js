@@ -1,39 +1,35 @@
-const stringify = (value) => {
-  if (typeof value !== 'object' || value === null) {
-    return typeof value === 'string' ? `'${value}'` : String(value)
+import _ from 'lodash';
+
+const stringify = (data) => {
+  if (_.isObject(data)) {
+    return '[complex value]';
   }
-  return '[complex value]'
-}
 
-const nodeHandlers = {
-  added: (node, currentPath) =>
-    `Property '${currentPath}' was added with value: ${stringify(node.value)}`,
+  return _.isString(data) ? `'${data}'` : data;
+};
 
-  removed: (node, currentPath) =>
-    `Property '${currentPath}' was removed`,
+const makePlain = (diff) => {
+  const iter = (tree, parent) => tree.flatMap((node) => {
+    const path = [...parent, node.key].join('.');
 
-  changed: (node, currentPath) =>
-    `Property '${currentPath}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
-
-  nested: (node, currentPath) =>
-    formatPlain(node.children, currentPath),
-
-  unchanged: () => [],
-}
-
-const formatPlain = (diff, path = '') => {
-  const lines = diff.flatMap((node) => {
-    const currentPath = path ? `${path}.${node.key}` : node.key
-    const handler = nodeHandlers[node.type]
-
-    if (!handler) {
-      throw new Error(`Unknown node type: ${node.type}`)
+    switch (node.state) {
+      case 'added':
+        return `Property '${path}' was added with value: ${stringify(node.value)}`;
+      case 'deleted':
+        return `Property '${path}' was removed`;
+      case 'unchanged':
+        return [];
+      case 'changed':
+        return `Property '${path}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
+      case 'nested':
+        return `${iter(node.value, [path]).join('\n')}`;
+      default:
+        throw new Error(`Type: ${node.state} is undefined`);
     }
+  });
 
-    return handler(node, currentPath)
-  })
+  const plainDiff = iter(diff, []);
+  return [...plainDiff].join('\n');
+};
 
-  return lines.join('\n')
-}
-
-export default formatPlain
+export default makePlain;
