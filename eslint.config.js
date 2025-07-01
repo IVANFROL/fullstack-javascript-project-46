@@ -28,7 +28,7 @@ export default [
       'semi': ['error', 'never'],
       'quotes': ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
-      'arrow-parens': ['error', 'always'],
+      'arrow-parens': ['error', 'as-needed'],
       'no-extra-parens': 'error',
       'no-constant-binary-expression': 'error',
     },

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-const stringify = (data) => {
+const stringify = data => {
   if (_.isObject(data)) {
     return '[complex value]'
   }
@@ -8,8 +8,8 @@ const stringify = (data) => {
   return _.isString(data) ? `'${data}'` : data
 }
 
-const makePlain = (diff) => {
-  const iter = (tree, parent) => tree.flatMap((node) => {
+const makePlain = diff => {
+  const iter = (tree, parent) => tree.flatMap(node => {
     const path = [...parent, node.key].join('.')
 
     switch (node.state) {
