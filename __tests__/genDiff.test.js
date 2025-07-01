@@ -6,8 +6,10 @@ import genDiff from '../src/index.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
-const readFile = filename => fs.readFileSync(getFixturePath(filename), 'utf-8')
+const getFixturePath = filename =>
+  path.join(__dirname, '..', '__fixtures__', filename)
+const readFile = filename =>
+  fs.readFileSync(getFixturePath(filename), 'utf-8')
 
 const extensions = ['json', 'yml']
 const correct = {
@@ -30,10 +32,15 @@ describe('Positives cases', () => {
 
 describe('Negative cases', () => {
   test('Check wrong file extension', () => {
-    const error = new Error('Invalid file extension: \'txt\'! Try supported formats.')
+    const error = new Error(
+      'Invalid file extension: \'txt\'! Try supported formats.',
+    )
 
     expect(() => {
-      genDiff(getFixturePath('file1-wrong.txt'), getFixturePath('file2-wrong.txt'))
+      genDiff(
+        getFixturePath('file1-wrong.txt'),
+        getFixturePath('file2-wrong.txt'),
+      )
     }).toThrow(error)
   })
 })
