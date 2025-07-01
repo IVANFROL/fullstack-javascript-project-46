@@ -25,6 +25,7 @@ export default defineConfig([
         afterAll: "readonly",
         __dirname: "readonly",
         __filename: "readonly",
+        process: "readonly",
       },
     },
   },
