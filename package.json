@@ -4,6 +4,9 @@
   "description": "Compares two configuration files and shows a difference",
   "main": "src/index.js",
   "type": "module",
+  "engines": {
+    "node": ">=18.14.0 <24.0.0"
+  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
