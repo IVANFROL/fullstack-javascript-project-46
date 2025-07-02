@@ -4,11 +4,11 @@ import globals from 'globals'
 export default [
   js.configs.recommended,
   {
-    files: ['**/*.{js,mjs,cjs,jsx}'],
+    files: ['**/*.js'],
     languageOptions: {
       globals: {
-        ...globals.browser,
         ...globals.node,
+        ...globals.browser,
         describe: 'readonly',
         test: 'readonly',
         expect: 'readonly',
@@ -25,14 +25,11 @@ export default [
     rules: {
       'no-unused-vars': 'error',
       'no-undef': 'error',
-
-      // Обычные стилистические правила
       'semi': ['error', 'never'],
       'quotes': ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
       'arrow-parens': ['error', 'as-needed'],
       'quote-props': ['error', 'consistent-as-needed'],
-
       'no-extra-parens': 'error',
       'no-constant-binary-expression': 'error',
     },
