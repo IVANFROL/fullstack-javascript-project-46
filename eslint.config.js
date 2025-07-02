@@ -25,10 +25,14 @@ export default [
     rules: {
       'no-unused-vars': 'error',
       'no-undef': 'error',
-      semi: ['error', 'never'],
-      quotes: ['error', 'single'],
+
+      // Обычные стилистические правила
+      'semi': ['error', 'never'],
+      'quotes': ['error', 'single'],
       'comma-dangle': ['error', 'always-multiline'],
-      'arrow-parens': ['error', 'always'],
+      'arrow-parens': ['error', 'as-needed'],
+      'quote-props': ['error', 'consistent-as-needed'],
+
       'no-extra-parens': 'error',
       'no-constant-binary-expression': 'error',
     },

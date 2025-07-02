@@ -23,7 +23,7 @@ const sign = {
 
 const makeStylish = (diff, replacer = '    ') => {
   const iter = (tree, depth) =>
-    tree.map((node) => {
+    tree.map(node => {
       const indent = replacer.repeat(depth)
       const indentForSign = indent.slice(2)
 
