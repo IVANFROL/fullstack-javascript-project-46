@@ -19,7 +19,7 @@ const correct = {
 }
 
 describe('Positives cases', () => {
-  extensions.forEach(ext => {
+  extensions.forEach((ext) => {
     test(`Format ${ext.toUpperCase()}`, () => {
       const file1 = getFixturePath(`file1.${ext}`)
       const file2 = getFixturePath(`file2.${ext}`)
@@ -36,11 +36,11 @@ describe('Negative cases', () => {
       'Invalid file extension: \'txt\'! Try supported formats.',
     )
 
-    expect(() =>
+    expect(() => {
       genDiff(
         getFixturePath('file1-wrong.txt'),
         getFixturePath('file2-wrong.txt'),
       )
-    ).toThrow(error)
+    }).toThrow(error)
   })
 })
