@@ -33,7 +33,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=IVANFROL_fullstack-javascript-project-46
-            -Dsonar.organization=budenchukm
+            -Dsonar.organization=ivanfrol
             -Dsonar.sources=src
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
             -Dsonar.sourceEncoding=UTF-8
